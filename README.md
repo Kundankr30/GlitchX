@@ -1,4 +1,4 @@
-# PDelhi-NCR Air Quality Intelligence: AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard
+# Delhi-NCR Air Quality Intelligence: AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard
 
 
 
@@ -20,7 +20,7 @@ The air pollution crisis in Delhi-NCR is a complex, seasonal, and multi-faceted 
 ---
 
 ## 💡 Our Solution: Project AQURA
-**AQURA (Air Quality & Urban Resilience Analytics)** is a unified software platform that bridges the information gap between pollution data and decisive action. By leveraging satellite imagery, ground-sensor data, and advanced AI/ML models, AQURA provides a high-resolution view of the air quality landscape.
+**Delhi-NCR Air Quality Intelligence** is a unified software platform that bridges the information gap between pollution data and decisive action. By leveraging satellite imagery, ground-sensor data, and advanced AI/ML models, AQURA provides a high-resolution view of the air quality landscape.
 
 Our platform offers two tailored interfaces:
 * A **Citizen App** to empower the public with personalized, hyperlocal information to protect their health.
