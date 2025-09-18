@@ -11,16 +11,6 @@
 
 ---
 
-## 📖 Table of Contents
-* [Problem Statement](#-problem-statement)
-* [Our Solution: Project AQURA](#-our-solution-project-aqura)
-* [Key Features](#-key-features)
-* [System Architecture](#-system-architecture)
-* [Tech Stack](#-tech-stack)
-* [Getting Started](#-getting-started)
-* [Meet the Team](#-meet-the-team)
-
----
 
 ## 🎯 Problem Statement
 **ID25216: AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard for Delhi-NCR**
@@ -69,12 +59,12 @@ Our system is built on a modern, scalable architecture designed for real-time da
 
 | Name             | Role                  | GitHub Profile                               |
 | ---------------- | --------------------- | -------------------------------------------- |
-| [Soumya Ranjan Pradhan]  | Team Lead / Backend   | [Link to GitHub]                             |
-| [Team Member 2]  | AI/ML Specialist      | [Link to GitHub]                             |
-| [Team Member 3]  | Frontend / App Dev    | [Link to GitHub]                             |
-| [Team Member 4]  | Data Engineering      | [Link to GitHub]                             |
-| [Team Member 5]  | UI/UX & Frontend      | [Link to GitHub]                             |
-| [Team Member 6]  | DevOps / Cloud        | [Link to GitHub]                             |
+| [Soumya Ranjan Pradhan]  | Team Lead    | [Link to GitHub]                             |
+| [Sharon Deb]  |  | [Link to GitHub]                             |
+| [Kundan Kumar]  |    | [Link to GitHub]                             |
+| [Aneesh Das Gupta]  |       | [Link to GitHub]                             |
+| [Mohit Malik]  |     | [Link to GitHub]                             |
+| [Omm Rout]  |      | [Link to GitHub]                             |
 
 ---
 
