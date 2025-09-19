@@ -217,7 +217,6 @@
             }, 1500);
         }
 
-        // Helper functions
         function getAQIClass(aqi) {
             if (aqi <= 50) return 'aqi-good';
             if (aqi <= 100) return 'aqi-moderate';
