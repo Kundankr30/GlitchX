@@ -70,3 +70,108 @@ Our system is built on a modern, scalable architecture designed for real-time da
 
 ## 📜 License
 This project is distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 🚀 Quick Start (MERN)
+
+### Prerequisites
+- Node.js 18+
+- npm
+- MongoDB (local or Atlas URI)
+- Python 3 (for the forecast endpoint)
+
+### 1) Install dependencies
+```bash
+# Frontend
+cd client && npm install
+
+# Backend
+cd ../server && npm install
+```
+
+### 2) Configure environment
+Create a `.env` in `server/`:
+```bash
+MONGO_URI=mongodb://localhost:27017/glitchx
+PORT=5000
+```
+For MongoDB Atlas, use your SRV connection string:
+```bash
+MONGO_URI=mongodb+srv://<user>:<pass>@<cluster>.mongodb.net/glitchx?retryWrites=true&w=majority&appName=<AppName>
+```
+
+### 3) Run in development
+Open two terminals:
+```bash
+# Terminal A - backend
+cd server && npm run dev
+
+# Terminal B - frontend
+cd client && npm run dev
+```
+- Frontend: http://localhost:5173
+- Backend health: http://localhost:5000/api/health
+- Frontend proxy to API: http://localhost:5173/api/health
+
+If accessing from another device on the network:
+```bash
+cd client && npm run dev -- --host
+```
+
+## 🧩 API Endpoints
+- `GET /api/health` → `{ status, db, timestamp }`
+- `GET /api/db-status` → `{ connected }`
+- `GET /api/readings` → List readings (503 if DB disconnected)
+- `POST /api/readings` → Create reading `{ locationName, latitude, longitude, so2, no2, spm }`
+- `GET /api/forecast` → Runs `predict_aqi.py` and returns stdout
+
+## 🗂️ Project Structure
+```
+GlitchX/
+  client/           # React + Vite frontend
+    public/         # static assets
+    src/
+      components/   # MapView, AQChart, Readings, Forecast
+      App.jsx       # UI with tabs mirroring original site
+      index.css     # Ported styles from style.css
+  server/           # Express + Mongoose backend
+    src/
+      routes/       # readings, forecast, health
+      models/       # Reading model
+      index.js      # App entry
+  predict_aqi.py    # Python forecast script
+```
+
+## 🏗️ Production build
+Front-end build:
+```bash
+cd client && npm run build
+```
+This creates `client/dist/`. To serve from Express, add static serving in `server/src/index.js` (optional), or deploy separately to a static host.
+
+## 🐞 Troubleshooting
+- Frontend blank/"site can’t be reached":
+  - Ensure dev servers running: `client:5173`, `server:5000`.
+  - If remote device: run `npm run dev -- --host` in client.
+- `db":"disconnected"` in `/api/health`:
+  - Start MongoDB locally or set a valid Atlas `MONGO_URI`.
+  - Ensure Atlas IP allowlist includes your machine.
+- `/api/readings` returns 503:
+  - DB not connected; start MongoDB or fix `MONGO_URI`.
+- `GET /api/forecast` errors:
+  - Ensure Python 3 is installed and accessible as `python3`.
+
+## 🔐 Security
+- Keep credentials out of source control. Use `.env` locally and environment variables in deployment.
+- Rotate any credentials shared during testing.
+
+## ✅ Scripts
+Backend (`server/package.json`):
+- `npm run dev` → Nodemon dev server
+- `npm start` → Node server
+
+Frontend (`client/package.json`):
+- `npm run dev` → Vite dev server
+- `npm run build` → Production build
+- `npm run preview` → Preview build
