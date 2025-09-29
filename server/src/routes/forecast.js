@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const scriptPath = path.resolve(__dirname, '../../../predict_aqi.py');
-  const py = spawn('python3', [scriptPath]);
+  const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+  const py = spawn(pythonCmd, [scriptPath]);
 
   let output = '';
   let error = '';
