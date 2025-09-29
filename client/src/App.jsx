@@ -7,13 +7,55 @@ import Forecast from './components/Forecast.jsx'
 
 function App() {
   const [tab, setTab] = React.useState('citizen')
+  const [aqiCards, setAqiCards] = React.useState([
+    { place: 'Connaught Place, Delhi', value: 186 },
+    { place: 'Noida', value: 172 },
+    { place: 'AIIMS, Delhi', value: 186 },
+    { place: 'Noida', value: 172 },
+    
+  ])
+  const [selectedCity, setSelectedCity] = React.useState('Connaught Place, Delhi')
+
+  function classifyAQI(value) {
+    if (value <= 50) return { label: 'Good', cls: 'aqi-good' }
+    if (value <= 100) return { label: 'Moderate', cls: 'aqi-moderate' }
+    if (value <= 200) return { label: 'Unhealthy', cls: 'aqi-unhealthy' }
+    return { label: 'Hazardous', cls: 'aqi-hazardous' }
+  }
+
+  function refreshAQI() {
+    setAqiCards(prev => prev.map(card => {
+      if (card.place !== selectedCity) return card
+      const jitter = Math.round((Math.random() - 0.5) * 40)
+      const next = Math.max(10, Math.min(400, card.value + jitter))
+      return { ...card, value: next }
+    }))
+  }
+
+  function refreshSources() {
+    // Placeholder: in a real app, fetch latest source data
+    // For now, just trigger a visual change by toggling tab quickly
+    setTab(t => t) // no-op to ensure re-render
+  }
   return (
     <div className="container">
       <div className="header">
         <img src="/pngtree-cityscape-vector-detailed-street-map-poster-of-delhi-city-vector-png-image_34943936.png" alt="Delhi-NCR Air Quality Intelligence Logo" width="160" className="logo" />
-        <div className="text" style={{ marginLeft: 20 }}>
-          <h1>Delhi-NCR Air Quality Intelligence</h1>
-          <p>AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard</p>
+        <div className="text" style={{ marginLeft: 20, flex: 1 }}>
+          <div className="title-row">
+            <div>
+              <h1 style={{ margin: 0 }}>Delhi-NCR Air Quality Intelligence</h1>
+              <p>AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard</p>
+            </div>
+            <div className="city-chooser">
+              <label htmlFor="city-select">City</label>
+              <select id="city-select" value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}>
+                {aqiCards.map(c => (
+                  <option key={c.place} value={c.place}>{c.place}</option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -27,22 +69,23 @@ function App() {
       <div style={{ marginTop: 24 }}>
         {tab === 'citizen' && (
           <div className="dashboard-grid">
-            <div className="card">
+            <div className="card aqi-card compact-card">
               <h3>🌡️ Current Air Quality</h3>
-              <div className="aqi-display aqi-unhealthy">
-                <div className="aqi-value">186</div>
-                <div className="aqi-label">Unhealthy</div>
-                <div style={{ fontSize: '0.9rem', marginTop: 10 }}>Connaught Place, Delhi</div>
-              </div>
-              <div className="aqi-display aqi-unhealthy">
-                <div className="aqi-value">172</div>
-                <div className="aqi-label">Unhealthy</div>
-                <div style={{ fontSize: '0.9rem', marginTop: 10 }}>Noida</div>
-              </div>
-              <button className="refresh-btn">🔄 Refresh Data</button>
+              {(() => {
+                const current = aqiCards.find(c => c.place === selectedCity) || aqiCards[0]
+                const meta = classifyAQI(current.value)
+                return (
+                  <div className={`aqi-display ${meta.cls}`}>
+                    <div className="aqi-value">{current.value}</div>
+                    <div className="aqi-label">{meta.label}</div>
+                    <div style={{ fontSize: '0.9rem', marginTop: 10 }}>{current.place}</div>
+                  </div>
+                )
+              })()}
+              <button className="refresh-btn" onClick={refreshAQI}>🔄 Refresh Data</button>
             </div>
 
-            <div className="card">
+            <div className="card alerts-card">
               <h3>⚠️ Health Alerts</h3>
               <div className="alert alert-danger">
                 <strong>High Pollution Alert!</strong><br />
@@ -54,12 +97,7 @@ function App() {
               </div>
             </div>
 
-            <div className="card">
-              <h3>🗺️ Hyperlocal AQI Map</h3>
-              <div className="map-container"><MapView /></div>
-            </div>
-
-            <div className="card">
+            <div className="card route-card compact-card">
               <h3>🛣️ Safe Route Suggestions</h3>
               <div className="alert alert-info">
                 <strong>Recommended Routes:</strong><br />
@@ -67,6 +105,11 @@ function App() {
                 • Avoid Ring Road (AQI: 220)<br />
                 • Best jogging areas: Lodhi Gardens (AQI: 165)
               </div>
+            </div>
+
+            <div className="card">
+              <h3>🗺️ Hyperlocal AQI Map</h3>
+              <div className="map-container"><MapView /></div>
             </div>
           </div>
         )}
@@ -133,7 +176,7 @@ function App() {
                 <strong>Latest Update (2 mins ago):</strong><br />
                 Sharp increase in PM2.5 levels in East Delhi due to industrial emissions spike.
               </div>
-              <button className="refresh-btn">🔄 Update Source Data</button>
+              <button className="refresh-btn" onClick={refreshSources}>🔄 Update Source Data</button>
             </div>
           </div>
         )}
