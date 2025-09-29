@@ -50,7 +50,7 @@ function App() {
               <p>AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard</p>
             </div>
             <div className="city-chooser">
-              <label htmlFor="city-select"></label>
+              <label htmlFor="city-select">Location</label>
               <select id="city-select" value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}>
                 {aqiCards.map(c => (
                   <option key={c.place} value={c.place}>{c.place}</option>
