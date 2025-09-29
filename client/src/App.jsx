@@ -212,7 +212,7 @@ function App() {
           </div>
         )}
         <div style={{ marginTop: 24 }}>
-          <h3>Backend Health</h3>
+          <h3></h3>
           <HealthCheck />
         </div>
       </div>
