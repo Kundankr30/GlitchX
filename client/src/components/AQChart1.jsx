@@ -3,18 +3,18 @@ import { Chart, LineController, LineElement, PointElement, LinearScale, Title, C
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend)
 
-export default function AQChart() {
+export default function AQChart1() {
   const canvasRef = React.useRef(null)
   React.useEffect(() => {
     const ctx = canvasRef.current.getContext('2d')
     const chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['2','6', '12', '24', '48', '54', '72'],
+        labels: ['Jan','Mar', 'May', 'july', 'Aug', 'Oct'],
         datasets: [
           {
             label: 'AQI',
-            data: [180, 210, 160, 200, 240, 190, 220],
+            data: [240, 210, 160, 140,150,220],
             borderColor: '#3b82f6',
             backgroundColor: 'rgba(59,130,246,0.2)',
             tension: 0.3,
@@ -25,7 +25,7 @@ export default function AQChart() {
         responsive: true,
         plugins: {
           legend: { display: true },
-          title: { display: true, text: 'Hourly AQI' },
+          title: { display: true, text: 'Seasonal AQI' },
         },
         scales: {
           y: { beginAtZero: true },

@@ -4,14 +4,16 @@ import MapView from './components/MapView.jsx'
 import AQChart from './components/AQChart.jsx'
 import Readings from './components/Readings.jsx'
 import Forecast from './components/Forecast.jsx'
+import AQChart1 from './components/AQChart1.jsx'
 
 function App() {
   const [tab, setTab] = React.useState('citizen')
   const [aqiCards, setAqiCards] = React.useState([
     { place: 'Connaught Place, Delhi', value: 186 },
-    { place: 'Noida', value: 172 },
+    { place: 'Noida', value: 192 },
     { place: 'AIIMS, Delhi', value: 186 },
-    { place: 'Noida', value: 172 },
+    { place: 'Janak Puri', value: 172 },
+    { place: 'Dwarka', value: 176 }
     
   ])
   const [selectedCity, setSelectedCity] = React.useState('Connaught Place, Delhi')
@@ -48,7 +50,7 @@ function App() {
               <p>AI-Driven Pollution Source Identification, Forecasting & Policy Dashboard</p>
             </div>
             <div className="city-chooser">
-              <label htmlFor="city-select">City</label>
+              <label htmlFor="city-select"></label>
               <select id="city-select" value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}>
                 {aqiCards.map(c => (
                   <option key={c.place} value={c.place}>{c.place}</option>
@@ -116,7 +118,7 @@ function App() {
         {tab === 'forecast' && (
           <div className="dashboard-grid">
             <div className="card">
-              <h3>🔮 24-72 Hour AQI Forecast</h3>
+              <h3>🔮 2-72 Hour AQI Forecast</h3>
               <div className="chart-container"><AQChart /></div>
               <div className="alert alert-warning">
                 <strong>AI Prediction:</strong> AQI expected to reach 250+ tomorrow due to low wind speeds and crop burning activity.
@@ -124,7 +126,7 @@ function App() {
             </div>
             <div className="card">
               <h3>📅 Seasonal Trends</h3>
-              <div className="chart-container"><AQChart /></div>
+              <div className="chart-container"><AQChart1 /></div>
             </div>
             <div className="card">
               <h3>🌤️ Weather Impact Analysis</h3>
@@ -205,10 +207,7 @@ function App() {
                 <div className="stat-item"><div className="stat-value">78%</div><div className="stat-label">Policy Compliance</div></div>
               </div>
             </div>
-            <div className="card">
-              <h3>Readings</h3>
-              <Readings />
-            </div>
+            
           </div>
         )}
         <div style={{ marginTop: 24 }}>
@@ -228,7 +227,7 @@ function HealthCheck() {
       .then(d => setStatus(`${d.status} @ ${d.timestamp}`))
       .catch(() => setStatus('error'))
   }, [])
-  return <pre>{status}</pre>
+  //return <pre>{status}</pre>
 }
 
 export default App
