@@ -43,14 +43,14 @@ export default function Readings() {
     <div>
       {error && <div className="alert alert-warning">{error === 'db_disconnected' ? 'Database is not connected. Start MongoDB to enable readings.' : error}</div>}
 
-      <form onSubmit={submit} style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 8 }}>
-        <input required placeholder="Location" value={form.locationName} onChange={e => setForm({ ...form, locationName: e.target.value })} />
-        <input required placeholder="Lat" value={form.latitude} onChange={e => setForm({ ...form, latitude: e.target.value })} />
-        <input required placeholder="Lng" value={form.longitude} onChange={e => setForm({ ...form, longitude: e.target.value })} />
-        <input required placeholder="SO2" value={form.so2} onChange={e => setForm({ ...form, so2: e.target.value })} />
-        <input required placeholder="NO2" value={form.no2} onChange={e => setForm({ ...form, no2: e.target.value })} />
-        <input required placeholder="SPM" value={form.spm} onChange={e => setForm({ ...form, spm: e.target.value })} />
-        <button type="submit" style={{ gridColumn: 'span 6' }}>Add Reading</button>
+      <form onSubmit={submit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, max-content))', gap: 8 }}>
+        <input required placeholder="Location" value={form.locationName} onChange={e => setForm({ ...form, locationName: e.target.value })} style={{ width: '140px', justifySelf: 'start' }} />
+        <input required placeholder="Lat" value={form.latitude} onChange={e => setForm({ ...form, latitude: e.target.value })} style={{ width: '100px', justifySelf: 'start' }} />
+        <input required placeholder="Lng" value={form.longitude} onChange={e => setForm({ ...form, longitude: e.target.value })} style={{ width: '100px', justifySelf: 'start' }} />
+        <input required placeholder="SO2" value={form.so2} onChange={e => setForm({ ...form, so2: e.target.value })} style={{ width: '100px', justifySelf: 'start' }} />
+        <input required placeholder="NO2" value={form.no2} onChange={e => setForm({ ...form, no2: e.target.value })} style={{ width: '100px', justifySelf: 'start' }} />
+        <input required placeholder="SPM" value={form.spm} onChange={e => setForm({ ...form, spm: e.target.value })} style={{ width: '100px', justifySelf: 'start' }} />
+        <button type="submit" style={{ gridColumn: 'span 2', justifySelf: 'start', width: 'fit-content' }}>Add Reading</button>
       </form>
 
       <table style={{ width: '100%', marginTop: 16 }}>
